@@ -1,0 +1,12 @@
+<div class="teams-container">
+  <h1>NBA Teams</h1>
+  <p *ngIf="loading">Loading teams...</p>
+  <div *ngIf="!loading && teams.length > 0">
+    <ul>
+      <li *ngFor="let team of teams">
+        <strong>{{ team.full_name }}</strong> - {{ team.city }}
+      </li>
+    </ul>
+  </div>
+  <p *ngIf="!loading && teams.length === 0">No teams found.</p>
+</div>

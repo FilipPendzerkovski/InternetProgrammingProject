@@ -1,0 +1,23 @@
+<div class="games-container">
+  <h1>NBA Games</h1>
+  <div class="filter-container">
+    <input type="date" placeholder="Start Date" (change)="filterGames($event, 'start')" />
+    <input type="date" placeholder="End Date" (change)="filterGames($event, 'end')" />
+  </div>
+  <p *ngIf="loading">Loading games...</p>
+  <div *ngIf="!loading && games.length > 0">
+    <ul>
+      <li *ngFor="let game of games">
+        <strong>{{ game.home_team.full_name }}</strong> vs <strong>{{ game.visitor_team.full_name }}</strong>
+        - Final Score: {{ game.home_team_score }} : {{ game.visitor_team_score }}
+        <br />
+        <small>Date: {{ game.date | date }}</small>
+      </li>
+    </ul>    
+    <div class="pagination">
+      <button *ngIf="previousCursor" (click)="fetchGames(previousCursor)">Previous</button>
+      <button *ngIf="nextCursor" (click)="fetchGames(nextCursor)">Next</button>
+    </div>    
+  </div>
+  <p *ngIf="!loading && games.length === 0">No games found.</p>
+</div>
